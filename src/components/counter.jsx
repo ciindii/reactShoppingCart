@@ -1,38 +1,37 @@
 import React, { Component } from 'react';
 
 class Counter extends Component {
-  state = {
-    count: 0,
-    tags: ['tag1', 'tag2', 'tag3']
-  };
+  constructor() {
+    super()
+    this.state = {
+      score: 0
+    };
+  }
 
-  styles = {
-    fontSize: '10px',
-    fontWeight: 'bold'
-  };
+  increnmentScore = () => {
+    this.setState( prevState => {
+      return {
+        score: prevState.score + 1
+      }
+    });
+  }
+
+  decrementScore = () => {
+    this.setState( prevState => {
+      return {
+        score: prevState.score - 1
+      }
+    });
+  }
 
   render() {
-
     return (
-      <React.Fragment>
-        <span style={this.styles} className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <button className="btn btn-secondary btn-sm">Increment</button>
-        <ul>
-          { this.state.tags.map(tag => <li>{tag}</li>) }
-        </ul>
-      </React.Fragment>
+      <div className="counter">
+        <button className="" onClick={this.increnmentScore}>+</button>
+        <span className="">{this.state.score}</span>
+        <button className="" onClick={this.decrementScore}>-</button>
+      </div>
     );
-  }
-
-  getBadgeClasses() {
-    let classes = "badge m-2 badge-";
-    classes += this.state.count === 0 ? "warning" : "primary";
-    return classes;
-  }
-
-  formatCount() {
-    const {count} = this.state;
-    return count === 0 ? 'Zero' : count;
   }
 }
 
